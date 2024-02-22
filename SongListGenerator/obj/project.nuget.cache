@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "6rrhBhjBiCyjYuzRX+vZ+mkH6DV7Yht6Srbe4fdnBxxV6/GH0smqOoBFOx0HT0wirplehQ7M0D6EkFWvOx7+AA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Owner\\RiderProjects\\SongListGenerator\\SongListGenerator\\SongListGenerator\\SongListGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Owner\\.nuget\\packages\\hdf.pinvoke.1.10\\1.10.612\\hdf.pinvoke.1.10.1.10.612.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\hdf5-csharp\\1.19.0\\hdf5-csharp.1.19.0.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\purehdf\\1.0.0-beta.2\\purehdf.1.0.0-beta.2.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\system.resources.extensions\\7.0.0\\system.resources.extensions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

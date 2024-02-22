@@ -1,0 +1,77 @@
+﻿@page "/"
+@using BlazorFrontend.Data
+@inject HomeAdapterService HomeAdapterService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Pick a genre to generate songs
+<EditForm 
+    FormName="Genres"
+    Model="RequestGenre"
+    OnValidSubmit="Create">
+    <label for="genres">Genres</label>
+    <InputSelect
+        class="form-select"
+        id="genres"
+        @bind-Value="RequestGenre!.Genre"
+        type="text">
+        <option value="">Select</option>
+        @foreach (var genre in _homeView.GenreList)
+        {
+            <option value="@genre.Value">@genre.Text</option>
+        }
+    </InputSelect>
+    <InputSelect
+        class="form-select"
+        id="artistId"
+        type="text"
+        @bind-Value="RequestGenre!.Artist">
+        <option value="">Select</option>
+        @foreach (var artist in _homeView?.Artists)
+        {
+            <option value="@artist.ArtistId">@artist.Artist</option>
+        }
+    </InputSelect>
+    <button type="submit" class="btn btn-primary">List Artists</button>
+</EditForm>
+<h1>Playlist</h1>
+@foreach (var song in _homeView.Songs)
+{
+    <div>@song.title by @song.artist_name</div>
+}
+@code {
+    private HomeView _homeView;
+    [SupplyParameterFromForm]
+    public RequestGenre? RequestGenre { get; set; }
+
+    [SupplyParameterFromForm] 
+    public RequestSongList? RequestSongList { get; set; } = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        RequestGenre ??= new();
+        RequestSongList ??= new();
+        _homeView = await HomeAdapterService.OnGet();
+    }
+    
+    private void Create()
+    {
+        if (RequestGenre.Artist != null && !string.IsNullOrWhiteSpace(RequestGenre.Artist))
+        {
+            _homeView = HomeAdapterService
+                .CreateSongList(RequestGenre.Artist, RequestGenre.Genre)
+                .GetAwaiter()
+                .GetResult();
+        }
+        else
+        {
+            _homeView = HomeAdapterService
+                .Create(RequestGenre.Genre)
+                .GetAwaiter()
+                .GetResult();
+        }
+    }
+}
